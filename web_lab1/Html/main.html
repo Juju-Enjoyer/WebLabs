@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="../Style/styles_main.css">
+
+
+</head>
+<body>
+<div class="StudentInfo">
+    <p>ФИО: Тюфяков Никита Евгеньевич</p>
+    <p>Группа: P3225</p>
+    <p>Вариант: 3522</p>
+</div>
+<div class="Graph">
+    <canvas id="graph" width="520" height="480"></canvas>
+</div>
+
+<div class="Point">
+    <canvas id="point" width="520" height="480"></canvas>
+</div>
+
+<div class="Form">
+        <input style="display: none" id="xCoo" name="x" onchange="com()" >
+    <div class="FormX">
+        <button type="button" value="-3" onclick="setX(this.value); com(); toggleButtonsX(this)">-3</button>
+        <button type="button"  value="-2" onclick="setX(this.value); com(); toggleButtonsX(this)">-2</button>
+        <button type="button"  value="-1" onclick="setX(this.value); com(); toggleButtonsX(this)">-1</button>
+        <button type="button"  value="0" onclick="setX(this.value); com(); toggleButtonsX(this)">0</button>
+        <button type="button"  value="1" onclick="setX(this.value); com(); toggleButtonsX(this)">1</button>
+        <button type="button"  value="2" onclick="setX(this.value); com(); toggleButtonsX(this)">2</button>
+        <button type="button"  value="3" onclick="setX(this.value); com(); toggleButtonsX(this)">3</button>
+        <button type="button"  value="4" onclick="setX(this.value); com(); toggleButtonsX(this)">4</button>
+        <button type="button"  value="5" onclick="setX(this.value); com(); toggleButtonsX(this)">5</button>
+    </div>
+    <input type="text" id="y" name="y" onchange="check(this); com()" placeholder="(-3, 3)">
+    <br>
+        <input style="display: none" id="r" name="r">
+    <div class="FormR">
+    <button type="button" value="1" onclick="drawGraph(1); toggleButtonsR(this)">1</button>
+    <button type="button" value="1.5" onclick="drawGraph(1.5); toggleButtonsR(this)">1.5</button>
+    <button type="button" value="2" onclick="drawGraph(2); toggleButtonsR(this)">2</button>
+    <button type="button" value="2.5" onclick="drawGraph(2.5); toggleButtonsR(this)">2.5</button>
+    <button type="button" value="3" onclick="drawGraph(3); toggleButtonsR(this)">3</button>
+    </div>
+    <button id="sendButton" onclick="send()" >Отправить</button>
+</div>
+<div class="ResultTable">
+    <div id="tableContainer">
+        <table>
+            <thead>
+            <th>X </th>
+            <th>Y </th>
+            <th>R </th>
+            <th>Время получения исполнения </th>
+            <th>Время исполнения </th>
+            <th>Статус запроса </th>
+            </thead>
+            <tbody id="tableBody">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="../js/coordinate_system.js"></script>
+<script src="../js/checkData.js"></script>
+<script src="../js/send.js"></script>
+
+</body>
+</html>
