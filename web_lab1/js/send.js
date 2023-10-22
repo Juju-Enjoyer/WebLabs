@@ -37,3 +37,4 @@ function send() {
       tableBody.appendChild(newRow);
     });
 }
+//Если что - то прям плохое(гавноКод) зарание извиняюсь) 
