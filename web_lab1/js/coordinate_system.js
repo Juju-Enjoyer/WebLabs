@@ -8,13 +8,22 @@ const yButton = document.getElementById("y");
 const graphWidth = graph.clientWidth;
 const graphHeight = graph.clientHeight;
 const cageSize = 40;
+const colorBlack = "rgb(0, 0, 0)";
+const colorRed = "rgb(255, 0, 0)";
+const colorCuriousBlue = "rgb(52, 152, 219)";
+const colorMariner = "rgb(41, 128, 185)";
+const colorCinnabar = "rgb(231, 76, 60)";
+const colorTallPoppy = "rgb(192, 57, 43)";
+const colorButtercup = "rgb(243, 156, 18)";
+const colorBurntOrange = "rgb(211, 84, 0)";
+const colorBlue = "rgb(25, 0, 255)";
 
 function drawGrid() {
   const xAxis = (Math.round(graphWidth / cageSize / 2) - 1) * cageSize;
   const yAxis = Math.round(graphHeight / cageSize / 2) * cageSize;
   ctx.font = "20px fantasy";
   ctx.beginPath();
-  ctx.strokeStyle = "rgb(255, 0, 0)";
+  ctx.strokeStyle = colorRed;
   for (let i = 0; i <= graphWidth; i = i + cageSize) {
     ctx.moveTo(i, 1);
     ctx.lineTo(i, graphHeight);
@@ -28,7 +37,7 @@ function drawGrid() {
   ctx.stroke();
   ctx.closePath();
   ctx.beginPath();
-  ctx.strokeStyle = "rgb(0, 0, 0)";
+  ctx.strokeStyle = colorBlack;
   ctx.moveTo(xAxis, 0);
   ctx.lineTo(xAxis - 1, graphHeight);
   ctx.stroke();
@@ -39,8 +48,8 @@ function drawGrid() {
 }
 
 function drawGraph(r) {
-  ctx.fillStyle = "rgb(0, 0, 0)";
-  ctx.strokeStyle = "rgb(0, 0, 0)";
+  ctx.fillStyle = colorBlack;
+  ctx.strokeStyle = colorBlack;
   ctx.clearRect(0, 0, graphWidth, graphHeight);
   drawGrid();
   const cage = r * cageSize;
@@ -49,17 +58,17 @@ function drawGraph(r) {
   triangle(cage, centerX, centerY);
   rectangle(cage, centerX, centerY);
   circle(cage, centerX, centerY);
-  ctx.fillStyle = "rgb(0, 0, 0)";
-  ctx.strokeStyle = "rgb(0, 0, 0)";
+  ctx.fillStyle = colorBlack;
+  ctx.strokeStyle = colorBlack;
   rRes.value = r;
 }
 
 function rectangle(cage, centerX, centerY) {
   ctx.beginPath();
   ctx.rect(centerX, centerY - cage, cage / 2, cage);
-  ctx.fillStyle = "rgb(52, 152, 219)";
+  ctx.fillStyle = colorCuriousBlue;
   ctx.fill();
-  ctx.strokeStyle = "rgb(41, 128, 185)";
+  ctx.strokeStyle = colorMariner;
   ctx.stroke();
   ctx.closePath();
 }
@@ -70,9 +79,9 @@ function triangle(cage, centerX, centerY) {
   ctx.lineTo(centerX, centerY - cage / 2);
   ctx.lineTo(centerX, centerY);
   ctx.closePath();
-  ctx.fillStyle = "rgb(231, 76, 60)";
+  ctx.fillStyle = colorCinnabar;
   ctx.fill();
-  ctx.strokeStyle = "rgb(192, 57, 43)";
+  ctx.strokeStyle = colorTallPoppy;
   ctx.stroke();
   ctx.closePath();
 }
@@ -82,9 +91,9 @@ function circle(cage, centerX, centerY) {
   ctx.moveTo(centerX, centerY);
   ctx.lineTo(centerX + cage / 2, centerY);
   ctx.arc(centerX, centerY, cage / 2, 0, (1 / 2) * Math.PI);
-  ctx.fillStyle = "rgb(243, 156, 18)";
+  ctx.fillStyle = colorButtercup;
   ctx.fill();
-  ctx.strokeStyle = "rgb(211, 84, 0)";
+  ctx.strokeStyle = colorBurntOrange;
   ctx.stroke();
   ctx.closePath();
 }
@@ -99,7 +108,7 @@ function dot() {
   pointCtx.clearRect(0, 0, graphWidth, graphHeight);
   pointCtx.beginPath();
   pointCtx.arc(x, y, 3, 0, 2 * Math.PI);
-  pointCtx.fillStyle = "rgb(25, 0, 255)";
+  pointCtx.fillStyle = colorBlue;
   pointCtx.fill();
   pointCtx.closePath();
 }
