@@ -17,8 +17,7 @@ function send() {
   }
   const data = { x: x.value, y: y.value, r: r.value };
   const params = new URLSearchParams(data);
-  /*const url = `https://se.ifmo.ru/~s368938/php/isHit.php?${params}`;*/
-  const url = `http://localhost:63342/web_lab1/php/isHit.php?${params}`;
+  const url = `https://se.ifmo.ru/~s368938/php/isHit.php?${params}`;
   fetch(url, {
     method: "GET",
   })
