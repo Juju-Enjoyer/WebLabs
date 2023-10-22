@@ -25,13 +25,13 @@ function isHit($x, $y, $r)
 
 function isOrangeZone($x, $y, $r)
 {
-    return $x >= 0 && $y <= 0 && ($x*$x + $y*$y <= ($r/2)*($r/2));
+    return $x >= 0 && $y <= 0 && ($x * $x + $y * $y <= ($r / 2) * ($r / 2));
 }
 
 
 function isBlueZone($x, $y, $r)
 {
-    return $x >= 0 && $x <= $r/2 && $y >= 0 && $y <= $r;
+    return $x >= 0 && $x <= $r / 2 && $y >= 0 && $y <= $r;
 }
 
 function isRedZone($x, $y, $r)
