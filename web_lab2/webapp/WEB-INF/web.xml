@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+   http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <servlet-class>web_lab2.servlets.ControllerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>tablePage</servlet-name>
+        <servlet-class>web_lab2.servlets.AreaCheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>tablePage</servlet-name>
+        <url-pattern>/table</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>points</servlet-name>
+        <servlet-class>web_lab2.servlets.ShutUpAndTakeMyPoint</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>points</servlet-name>
+        <url-pattern>/point</url-pattern>
+    </servlet-mapping>
+</web-app>
