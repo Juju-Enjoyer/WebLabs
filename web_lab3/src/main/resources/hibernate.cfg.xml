@@ -7,8 +7,8 @@
     <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:9989/studs</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.username">s368938</property>
-    <property name="hibernate.connection.password">5sG4j6tOx0XjbQMc</property>
+    <property name="hibernate.connection.username">*******</property>
+    <property name="hibernate.connection.password">****************</property>
      <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="Point.hbm.xml"/>
   </session-factory>
