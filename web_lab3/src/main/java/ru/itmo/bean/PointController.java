@@ -3,22 +3,31 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Named;
+import jakarta.validation.ValidationException;
+import org.hibernate.HibernateError;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import jakarta.faces.validator.ValidatorException;
 import ru.itmo.somethingRelatedToDatabases.DataBaseController;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import static java.lang.Math.abs;
+import static java.lang.Math.floorDiv;
 
 @Named
 @ApplicationScoped
 public class PointController implements Serializable {
     private List<Point> pointList;
+    List<Integer> R_LIST = new ArrayList(Arrays.asList(1, 2, 3, 4, 5));
 
     private final DataBaseController dataBaseController;
 
@@ -37,20 +46,28 @@ public class PointController implements Serializable {
         this.pointList = pointList;
     }
     public void creatPoint(float x, String y, int r){
-        float omegaY = Float.parseFloat(y);
-        Point newPoint = new Point();
-        newPoint.setX(x);
-        newPoint.setY(y);
-        newPoint.setR(r);
-        LocalDateTime localDateTime = LocalDateTime.now();
-        Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-        newPoint.setCreationDate(date);
-        long startExecute = System.nanoTime();
-        newPoint.setResult(isHit(x,omegaY,r));
-        long endExecute = System.nanoTime();
-        newPoint.setExecuteTime(endExecute-startExecute);
-        pointList.add(newPoint);
-        dataBaseController.addPoint(newPoint);
+        try {
+            if(anotherValidate(r,x,y)){
+            float omegaY = Float.parseFloat(y);
+            Point newPoint = new Point();
+            newPoint.setX(x);
+            newPoint.setY(y);
+            newPoint.setR(r);
+            LocalDateTime localDateTime = LocalDateTime.now();
+            Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+            newPoint.setCreationDate(date);
+            long startExecute = System.nanoTime();
+            newPoint.setResult(isHit(x,omegaY,r));
+            long endExecute = System.nanoTime();
+            newPoint.setExecuteTime(endExecute-startExecute);
+            pointList.add(newPoint);
+            dataBaseController.addPoint(newPoint);}
+            else {
+                throw new ValidationException("Ошибка ввлидации исправте пожалуйста");
+            }
+        }catch (HibernateError ignored){}
+
+
     }
     public static boolean isHit(float x, float y, float r) {
         return isOrangeZone(x, y, r) ||
@@ -77,4 +94,28 @@ public class PointController implements Serializable {
         String json = objectMapper.writeValueAsString(pointList);
         return json;
     }
+public boolean anotherValidate(int r,float x, String y){
+        return (validateR(r)||validateX(x)||validateY(y));
+}
+    public boolean validateR(int r){
+        return R_LIST.contains(r);
+    }
+    public boolean validateX(float x){
+        if(x>2 || x<-2){
+            return false;
+        }
+        return true;
+    }
+    public boolean validateY(String y){
+        try {
+            float omegaY = Float.parseFloat(y);
+            if (omegaY>3||omegaY<-5){
+                return false;
+            }
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
 }
